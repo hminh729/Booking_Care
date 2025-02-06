@@ -1,7 +1,18 @@
 const { error } = require('console');
-
+const db = require("../models/index")
 const getHomepage = async (req, res) => {
-    return res.render('home.ejs')
+    try {
+        let data = await db.User.findAll();
+        console.log("-----------------------");
+        console.log(data)
+        return res.render('home.ejs', {
+            data: JSON.stringify(data)
+        });
+
+    } catch (e) {
+        console.log(e)
+    }
+
 }
 
 
